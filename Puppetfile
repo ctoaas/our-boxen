@@ -60,6 +60,17 @@ github "xquartz",     "1.2.1"
 
 # Optional/custom modules. There are tons available at
 # https://github.com/boxen.
+
+github "dropbox", "2.10.41"
+github "dropbox", "2.10.41"
+github "vagrant", "3.3.4"
+github "vagrant_manager", "0.0.1"
+github "docker", "1.0.0"
+github "sublime_text", "1.1.1"
+github "teamviewer", "1.0.1"
+github "hipchat", "1.1.3"
+github "slack", "1.0.6"
+
 # github "elasticsearch", "2.8.0"
 # github "mysql",         "2.0.1"
 # github "postgresql",  "4.0.1"
