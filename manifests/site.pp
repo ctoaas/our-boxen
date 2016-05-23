@@ -57,6 +57,13 @@ node default {
   include git
   include hub
   include nginx
+  include vagrant
+  include vagrant_manager
+  include sublime_text
+  # include docker
+  include teamviewer
+  include hipchat
+  include mongodb
 
   # fail if FDE is not enabled
   if $::root_encrypted == 'no' {
@@ -67,12 +74,59 @@ node default {
   nodejs::version { '0.8': }
   nodejs::version { '0.10': }
   nodejs::version { '0.12': }
+  # nodejs::global { '0.12': }
+
+  class { 'nodejs::global':
+    version => '0.12'
+  }
 
   # default ruby versions
   ruby::version { '1.9.3': }
   ruby::version { '2.0.0': }
   ruby::version { '2.1.8': }
   ruby::version { '2.2.4': }
+
+  # docker::compose::version { '1.11.1': }
+  # class { 'docker':
+  #   compose::version => '1.11.1'
+  #   # compose => {
+  #   #   version => '1.11.1'
+  #   # }
+  # }
+
+  package { 'docker':
+    ensure => present
+  }
+
+  package { 'ansible':
+    ensure => present
+  }
+  
+  package { 'homebrew/php/composer':
+    ensure => present
+  }
+
+  package { 'packer':
+    ensure => present
+  }
+  
+  package { 'transmission': provider => 'brewcask' }
+  package { 'sonos': provider => 'brewcask' }
+  package { 'vlc': provider => 'brewcask' }
+  package { 'serviio': provider => 'brewcask' }
+  package { 'flowsync': provider => 'brewcask' }
+  package { 'paintbrush': provider => 'brewcask' }
+  package { 'google-chrome': provider => 'brewcask' }
+
+
+  class { 'virtualbox':
+    version     => '5.0.14',
+    patch_level => '105127'
+  }
+
+  # sublime_text::package { 'Emmet':
+  #   source => 'sergeche/emmet-sublime'
+  # }
 
   # common, useful packages
   package {
