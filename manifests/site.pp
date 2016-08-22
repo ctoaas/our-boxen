@@ -8,9 +8,6 @@ Exec {
   user        => $boxen_user,
 
   path => [
-    "${boxen::config::home}/rbenv/shims",
-    "${boxen::config::home}/rbenv/bin",
-    "${boxen::config::home}/rbenv/plugins/ruby-build/bin",
     "${boxen::config::homebrewdir}/bin",
     '/usr/bin',
     '/bin',
@@ -55,7 +52,7 @@ node default {
   # core modules, needed for most things
   include dnsmasq
   include git
-  include hub
+  # include hub
   include nginx
   include vagrant
   include vagrant_manager
@@ -74,6 +71,7 @@ node default {
   nodejs::version { '0.8': }
   nodejs::version { '0.10': }
   nodejs::version { '0.12': }
+  nodejs::version { '4.4.7': }
   # nodejs::global { '0.12': }
 
   class { 'nodejs::global':
@@ -81,10 +79,10 @@ node default {
   }
 
   # default ruby versions
-  ruby::version { '1.9.3': }
-  ruby::version { '2.0.0': }
-  ruby::version { '2.1.8': }
-  ruby::version { '2.2.4': }
+  # ruby::version { '1.9.3': }
+  # ruby::version { '2.0.0': }
+  # ruby::version { '2.1.8': }
+  # ruby::version { '2.2.4': }
 
   # docker::compose::version { '1.11.1': }
   # class { 'docker':
@@ -109,6 +107,14 @@ node default {
   package { 'packer':
     ensure => present
   }
+
+  package { 'python':
+    ensure => present
+  }
+
+  package { 'mysql':
+    ensure => present
+  }
   
   package { 'transmission': provider => 'brewcask' }
   package { 'sonos': provider => 'brewcask' }
@@ -117,6 +123,9 @@ node default {
   package { 'flowsync': provider => 'brewcask' }
   package { 'paintbrush': provider => 'brewcask' }
   package { 'google-chrome': provider => 'brewcask' }
+  package { 'google-hangouts': provider => 'brewcask' }
+  package { 'skype': provider => 'brewcask' }
+  package { 'java': provider => 'brewcask' }
 
 
   class { 'virtualbox':
