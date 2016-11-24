@@ -53,9 +53,7 @@ node default {
   include dnsmasq
   include git
   # include hub
-  include nginx
-  include vagrant
-  include vagrant_manager
+  # include nginx
   include sublime_text
   # include docker
   include teamviewer
@@ -71,7 +69,7 @@ node default {
   nodejs::version { '0.8': }
   nodejs::version { '0.10': }
   nodejs::version { '0.12': }
-  nodejs::version { '4.4.7': }
+  nodejs::version { '4.4.0': }
   # nodejs::global { '0.12': }
 
   class { 'nodejs::global':
@@ -92,6 +90,8 @@ node default {
   #   # }
   # }
 
+  # homebrew::tap { 'homebrew/php': }
+
   package { 'docker':
     ensure => present
   }
@@ -100,7 +100,7 @@ node default {
     ensure => present
   }
   
-  package { 'homebrew/php/composer':
+  package { 'composer':
     ensure => present
   }
 
@@ -115,6 +115,11 @@ node default {
   package { 'mysql':
     ensure => present
   }
+
+  package { 'heroku-toolbelt':
+    ensure => present
+  }
+
   
   package { 'transmission': provider => 'brewcask' }
   package { 'sonos': provider => 'brewcask' }
@@ -126,12 +131,10 @@ node default {
   package { 'google-hangouts': provider => 'brewcask' }
   package { 'skype': provider => 'brewcask' }
   package { 'java': provider => 'brewcask' }
+  package { 'virtualbox': provider => 'brewcask' }
+  package { 'vagrant': provider => 'brewcask' }
+  package { 'vagrant-manager': provider => 'brewcask' }
 
-
-  class { 'virtualbox':
-    version     => '5.0.14',
-    patch_level => '105127'
-  }
 
   # sublime_text::package { 'Emmet':
   #   source => 'sergeche/emmet-sublime'
